@@ -43,6 +43,7 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix build-system haskell)
   #:use-module (gnu packages)
+  #:use-module (gnu packages bash)
   #:use-module (gnu packages curl)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages gl)
@@ -857,7 +858,8 @@ Haskell.")
                                     "/lib"))))
                #t))))))
     (inputs
-     (list ghc-extensible-exceptions
+     (list bash-minimal
+           ghc-extensible-exceptions
            ghc-random
            ghc-glut
            freeglut
