@@ -38,6 +38,7 @@
   #:use-module (gnu packages autotools)
   #:use-module (gnu packages avahi)
   #:use-module (gnu packages base)
+  #:use-module (gnu packages bash)
   #:use-module (gnu packages cmake)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages crypto)
@@ -125,6 +126,7 @@
      (list libappindicator
            at-spi2-core
            avahi
+           bash-minimal
            cairo
            cups
            ffmpeg
