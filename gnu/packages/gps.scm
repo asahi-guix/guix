@@ -37,6 +37,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu packages algebra)
   #:use-module (gnu packages base)
+  #:use-module (gnu packages bash)
   #:use-module (gnu packages build-tools)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages docbook)
@@ -229,7 +230,8 @@ such as elevation, speed, heart rate, power, temperature, and gear shifts.")
     (native-inputs
      (list bc pkg-config))
     (inputs
-     (list bluez
+     (list bash-minimal
+           bluez
            dbus
            gtk+
            libcap
