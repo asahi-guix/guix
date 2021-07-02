@@ -1808,6 +1808,7 @@ ca495991b7852b855"))
                   `("LD_LIBRARY_PATH" prefix (,pulseaudio-lib ,eudev-lib ,libnotify-lib)))))))))
     (inputs
      (list alsa-lib
+           bash-minimal
            bzip2
            cairo
            cups
