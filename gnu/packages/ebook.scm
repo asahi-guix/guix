@@ -159,7 +159,8 @@ with Microsoft Compiled HTML (CHM) files")
            qtbase-5                     ; for qmake
            xdg-utils))
     (inputs
-     (list fontconfig
+     (list bash-minimal
+           fontconfig
            font-liberation
            glib
            hunspell
