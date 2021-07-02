@@ -4205,7 +4205,8 @@ NUMA performance on your system.")
     (native-inputs
      (list autoconf pkg-config))
     (inputs
-     `(("bzip2" ,bzip2)
+     `(("bash" ,bash-minimal) ; for wrap-program
+       ("bzip2" ,bzip2)
        ("gzip" ,gzip)
        ("pam" ,linux-pam)
        ("xz" ,xz)
@@ -5352,7 +5353,8 @@ thanks to the use of namespaces.")
                    (string-append (which "env") " "
                                   #$output "/bin/singularity")))))))))
     (inputs
-     (list coreutils
+     (list bash-minimal
+           coreutils
            libarchive
            python-wrapper
            squashfs-tools
