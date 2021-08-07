@@ -185,6 +185,7 @@ commit hash and its date rather than a proper release tag."
                    (build-flags ''())
                    (tests? #t)
                    (parallel-build? #t)
+                   (parallel-tests? #t)
                    (allow-go-reference? #f)
                    (system (%current-system))
                    (goarch #f)
@@ -216,6 +217,7 @@ commit hash and its date rather than a proper release tag."
                     #:build-flags #$build-flags
                     #:tests? #$tests?
                     #:parallel-build? #$parallel-build?
+                    #:parallel-tests? #$parallel-tests?
                     #:allow-go-reference? #$allow-go-reference?
                     #:inputs #$(input-tuples->gexp inputs)))))
 
