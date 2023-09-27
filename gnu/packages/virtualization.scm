@@ -1328,8 +1328,7 @@ of one or more RISC-V harts.")
      (list `(,glib "bin")                ;glib-mkenums, etc.
            gobject-introspection
            gtk-doc/stable
-           `(,hwdata "pci")
-           `(,hwdata "usb")
+           hwdata
            vala
            intltool
            pkg-config))
