@@ -1752,7 +1752,7 @@ functionality to display information about the most commonly used services.")
            xorg-server-xwayland))
     (native-inputs
      (cons*
-       `(,hwdata "pnp")
+       hwdata
        pkg-config
        wayland
        (if (%current-target-system)

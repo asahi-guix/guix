@@ -1302,7 +1302,7 @@ KDE Frameworks components.")
                   eudev
                   fontconfig
                   freetype
-                  `(,hwdata "pnp")
+                  hwdata
                   kactivities
                   kcmutils
                   kcompletion
