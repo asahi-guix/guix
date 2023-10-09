@@ -287,7 +287,6 @@
            gobject-introspection
            gsettings-desktop-schemas
            gtk-doc/stable
-           libxml2                      ;for XML_CATALOG_FILES
            pkg-config))
     (propagated-inputs
      ;; These libraries are required by the .pc file.
@@ -686,7 +685,6 @@ of writing test cases for asynchronous interactions.")
            gtk-doc/stable
            ;; Would only be required by configure flag "--enable-extended-tests".
            ;;gtx
-           libxml2                      ;for XML_CATALOG_FILES
            pkg-config
            python-pygobject
            python-wrapper
@@ -748,7 +746,6 @@ of known objects without needing a central registrar.")
            gobject-introspection
            gtk-doc/stable
            libtool
-           libxml2                      ;for XML_CATALOG_FILES
            pkg-config
            vala
            xorg-server-for-tests))
@@ -1813,7 +1810,6 @@ client devices can handle.")
            `(,glib "bin")
            gtk-doc/stable
            gobject-introspection
-           libxml2                      ;for XML_CATALOG_FILES
            pkg-config
            vala))
     (inputs
