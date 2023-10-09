@@ -2159,7 +2159,7 @@ above command-line parameters.")
         #:modules `(((guix build guile-build-system)
                      #:select
                      (target-guile-effective-version))
-                    ,@%default-gnu-imported-modules)
+                    ,@%default-gnu-modules)
         #:phases
         (with-imported-modules `((guix build guile-build-system)
                                  ,@%default-gnu-imported-modules)
