@@ -341,7 +341,7 @@ or musca).
      (list asciidoc
            perl
            pkg-config
-           docbook-xsl libxml2          ; for XML_CATALOG_FILES
+           docbook-xsl
            xmlto))
     (home-page "https://i3wm.org/i3status/")
     (synopsis "Status bar for i3bar, dzen2, xmobar or similar programs")
@@ -1207,7 +1207,6 @@ for wlroots-based Wayland compositors.")
            doxygen
            gperf
            imagemagick
-           libxml2 ;for XML_CATALOG_FILES
            lua-ldoc
            pkg-config
            xmlto))
