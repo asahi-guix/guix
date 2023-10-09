@@ -4542,7 +4542,6 @@ to the in-kernel OOM killer.")
            ;; For documentation.
            docbook-xml-4.2
            docbook-xsl
-           libxml2            ;for $XML_CATALOG_FILES
            libxslt))
     (inputs
      ;; When linked against libblkid, eudev can populate /dev/disk/by-label
