@@ -201,9 +201,9 @@
     (arguments
      `(#:modules (((guix build guile-build-system)
                    #:select (target-guile-effective-version))
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:imported-modules ((guix build guile-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:make-flags
        ;; TODO: The documentation must be built with the `docs' target.
        (let* ((out (assoc-ref %outputs "out"))
@@ -290,9 +290,9 @@ more.")
      `(#:make-flags '("GUILE_AUTO_COMPILE=0")
        #:modules (((guix build guile-build-system)
                    #:select (target-guile-effective-version))
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:imported-modules ((guix build guile-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:phases (modify-phases %standard-phases
                   (add-after 'install 'wrap-guilescript
                     (lambda* (#:key outputs #:allow-other-keys)
@@ -786,9 +786,9 @@ you send to a FIFO file.")
     (arguments
      `(#:modules (((guix build guile-build-system)
                    #:select (target-guile-effective-version))
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:imported-modules ((guix build guile-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:phases (modify-phases %standard-phases
                   (delete 'strip)
                   (add-after 'install 'wrap-program
@@ -1926,9 +1926,9 @@ bindings to the @code{yaml-cpp} C++ library.")
     (arguments
      `(#:modules (((guix build guile-build-system)
                    #:select (target-guile-effective-version))
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:imported-modules ((guix build guile-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:configure-flags
        (list (string-append
               "--with-guile-site-dir=" %output "/share/guile/site/"
@@ -2159,10 +2159,10 @@ above command-line parameters.")
         #:modules `(((guix build guile-build-system)
                      #:select
                      (target-guile-effective-version))
-                    ,@%gnu-build-system-modules)
+                    ,@%default-gnu-imported-modules)
         #:phases
         (with-imported-modules `((guix build guile-build-system)
-                                 ,@%gnu-build-system-modules)
+                                 ,@%default-gnu-imported-modules)
           #~(modify-phases %standard-phases
               (add-after 'install 'hall-wrap-binaries
                 (lambda* (#:key inputs #:allow-other-keys)
@@ -2308,7 +2308,7 @@ user which package sets would they like to install from it.")
                   (guix build emacs-utils)
                   (ice-9 rdelim)
                   (ice-9 popen))
-       #:imported-modules (,@%gnu-build-system-modules
+       #:imported-modules (,@%default-gnu-imported-modules
                            (guix build emacs-build-system)
                            (guix build emacs-utils))
        #:phases
@@ -2717,7 +2717,7 @@ many readers as needed).")
                    #:select (target-guile-effective-version))
                   (guix build utils))
        #:imported-modules ((guix build guile-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:configure-flags (list "--with-gnu-filesystem-hierarchy")
        #:phases
        (modify-phases %standard-phases
@@ -3036,7 +3036,7 @@ inspired by the SCSH regular expression system.")
     (build-system gnu-build-system)
     (arguments
      `(#:modules ((ice-9 match) (ice-9 ftw)
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:tests? #f ; test suite is non-deterministic :(
        #:phases (modify-phases %standard-phases
                   (add-after 'install 'wrap-haunt
@@ -3321,7 +3321,7 @@ The picture values can directly be displayed in Geiser.")
        `(#:modules
          ((ice-9 match)
           (srfi srfi-1)
-          ,@%gnu-build-system-modules)
+          ,@%default-gnu-imported-modules)
          #:tests? #f                    ; there are none
          #:make-flags
          (list (string-append "PICT_DIR="
@@ -5706,9 +5706,9 @@ schedulers.")
       (arguments
        `(#:modules (((guix build guile-build-system)
                      #:prefix guile:)
-                    ,@%gnu-build-system-modules)
+                    ,@%default-gnu-imported-modules)
          #:imported-modules ((guix build guile-build-system)
-                             ,@%gnu-build-system-modules)
+                             ,@%default-gnu-imported-modules)
          #:tests? #false ; there are none
          #:phases
          (modify-phases %standard-phases
@@ -5893,9 +5893,9 @@ high-level API for network management that uses rtnetlink.")
      `(#:make-flags '("GUILE_AUTO_COMPILE=0") ;to prevent guild warnings
        #:modules (((guix build guile-build-system)
                    #:select (target-guile-effective-version))
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:imported-modules ((guix build guile-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:phases (modify-phases %standard-phases
                   (add-after 'install 'wrap-program
                     (lambda* (#:key inputs outputs #:allow-other-keys)
@@ -5922,6 +5922,7 @@ high-level API for network management that uses rtnetlink.")
     (native-inputs (list autoconf automake pkg-config texinfo))
     (inputs (list bash-minimal guile-2.2 guile2.2-json guile2.2-lib
                   guile2.2-gnutls))
+
     (home-page "https://github.com/artyom-poptsov/guile-gitlab")
     (synopsis "Guile interface to GitLab")
     (description
@@ -5949,9 +5950,9 @@ GitLab instance.")
      `(#:make-flags '("GUILE_AUTO_COMPILE=0")     ;to prevent guild warnings
        #:modules (((guix build guile-build-system)
                    #:select (target-guile-effective-version))
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:imported-modules ((guix build guile-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:phases
        (modify-phases %standard-phases
          (delete 'strip)

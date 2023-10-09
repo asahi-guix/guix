@@ -566,7 +566,7 @@ featuring various improvements and bug fixes.")))
        #:parallel-build? #f
        #:tests? #f ;; no tests-suite
        #:modules ((srfi srfi-1)
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:phases
        (modify-phases %standard-phases
          (add-after 'build 'make-doc
@@ -663,7 +663,7 @@ multipole-accelerated algorithm.")
        #:parallel-build? #f
        #:tests? #f ;; no tests-suite
        #:modules ((srfi srfi-1)
-                  ,@%gnu-build-system-modules)
+                  ,@%default-gnu-imported-modules)
        #:phases
        (modify-phases %standard-phases
          (delete 'configure)
@@ -3217,7 +3217,7 @@ program that can perform mesh processing tasks in batch mode, without a GUI.")
      (list
       #:imported-modules `((guix build emacs-build-system)
                            (guix build emacs-utils)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
       #:modules '((guix build gnu-build-system)
                   ((guix build emacs-build-system) #:prefix emacs:)
                   (guix build utils))

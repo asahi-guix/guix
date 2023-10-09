@@ -2182,7 +2182,7 @@ pointers, containers, compiler building blocks, etc.")
     (arguments
      `(#:test-target "test"
        #:imported-modules ((guix build copy-build-system)
-                           ,@%gnu-build-system-modules)
+                           ,@%default-gnu-imported-modules)
        #:modules (((guix build copy-build-system) #:prefix copy:)
                   (guix build gnu-build-system)
                   (guix build utils))

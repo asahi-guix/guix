@@ -3875,7 +3875,7 @@ and targeted primarily for asynchronous processing of HTTP-requests.")
       (arguments
        (list
         #:imported-modules `((guix build python-build-system) ;for site-packages
-                             ,@%gnu-build-system-modules)
+                             ,@%default-gnu-imported-modules)
         #:modules '(((guix build python-build-system) #:prefix python:)
                     (guix build gnu-build-system)
                     (guix build utils))
