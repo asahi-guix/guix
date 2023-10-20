@@ -3903,7 +3903,7 @@ using the remote repository URL's host and path.")
                  "tkrev")))))
        #:tests? #f))
     (inputs
-     (list tk))
+     (list bash-minimal tk))
     (home-page "https://tkcvs.sourceforge.io")
     (synopsis "Graphical interface to CVS, Subversion, Git, and RCS")
     (description
