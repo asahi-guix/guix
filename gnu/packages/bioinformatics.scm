@@ -6173,7 +6173,8 @@ apart transcripts derived from paralogous genes.")
                (wrap-program (string-append bin "/RepeatMasker")
                  `("PERL5LIB" ":" prefix (,path ,share)))))))))
     (inputs
-     (list perl
+     (list bash-minimal
+           perl
            perl-text-soundex
            python
            python-h5py
