@@ -1805,8 +1805,7 @@ by bandwidth they use.")
              (substitute* (list "lib/App/ClusterSSH/Config.pm"
                                 "t/15config.t")
                (("xterm")
-                (which "xterm")))
-             #t))
+                (which "xterm")))))
          (add-before 'check 'delete-failing-tests
            (lambda _
              ;; This checks whether all code is nicely formatted.  The above
@@ -1814,8 +1813,7 @@ by bandwidth they use.")
              (delete-file "t/perltidy.t")
              ;; Update the manifest so t/manifest.t happily passes.
              (substitute* "MANIFEST"
-               (("t/perltidy.t\n") ""))
-             #t))
+               (("t/perltidy.t\n") ""))))
          (add-after 'install 'augment-library-path
            (lambda* (#:key inputs outputs #:allow-other-keys)
              (let* ((out (assoc-ref outputs "out"))
@@ -1840,8 +1838,7 @@ by bandwidth they use.")
                                                "perl-try-tiny"
                                                "perl-x11-protocol"
                                                "perl-x11-protocol-other")))))))
-                  (find-files "." ".*")))
-               #t))))))
+                  (find-files "." ".*")))))))))
     (native-inputs
      (list perl-cpan-changes
            perl-file-slurp
@@ -1856,7 +1853,8 @@ by bandwidth they use.")
            perl-test-trap
            perltidy))
     (inputs
-     (list perl-exception-class
+     (list bash-minimal                 ;for wrap-program
+           perl-exception-class
            perl-sort-naturally
            perl-tk
            perl-try-tiny
