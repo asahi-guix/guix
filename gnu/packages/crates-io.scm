@@ -39228,7 +39228,10 @@ introspection APIs.")
                ;; https://github.com/tikv/jemallocator/issues/19
                (setenv "CARGO_FEATURE_UNPREFIXED_MALLOC_ON_SUPPORTED_PLATFORMS" "1")
                (setenv "JEMALLOC_OVERRIDE"
-                       (string-append jemalloc "/lib/libjemalloc_pic.a"))))))))
+                       (string-append jemalloc "/lib/libjemalloc_pic.a")))))
+         (add-after 'configure 'with-lg-page-jemalloc
+           (lambda _
+             (setenv "JEMALLOC_SYS_WITH_LG_PAGE" "14"))))))
     (native-inputs
      (list jemalloc))
     (home-page "https://github.com/tikv/jemallocator")
