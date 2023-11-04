@@ -393,6 +393,9 @@ them in order to efficiently transfer a minimal amount of data.")
                            (lambda _
                              (substitute* "test/log/meson.build"
                                ((".*'name': 'log_process'.*")
+                                ""))
+                             (substitute* "test/meson.build"
+                               ((".*'name': 'file'.*")
                                 "")))))
                       #~())
                (add-after 'install 'move-doc-and-gst
