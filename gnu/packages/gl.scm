@@ -634,34 +634,19 @@ from software emulation to complete hardware acceleration for modern GPUs.")
   (origin
     (method url-fetch)
     (uri (string-append "ftp://ftp.freedesktop.org/pub/mesa/demos"
-                        "/mesa-demos-" version ".tar.bz2"))
-    (sha256 (base32 "0zgzbz55a14hz83gbmm0n9gpjnf5zadzi2kjjvkn6khql2a9rs81"))))
+                        "/mesa-demos-" version ".tar.xz"))
+    (sha256 (base32 "0ss9xpqykwfzkhr55nbfml61dsxz4dgpl9fxxgvil1bvdb9a6iih"))))
 
 (define-public mesa-utils
   (package
     (name "mesa-utils")
-    (version "8.4.0")
+    (version "9.0.0")
     (source (mesa-demos-source version))
-    (build-system gnu-build-system)
+    (build-system meson-build-system)
     (inputs
      (list mesa freeglut glew))
     (native-inputs
      (list pkg-config))
-    (arguments
-     (list
-      #:phases
-      #~(modify-phases %standard-phases
-          (replace 'install
-            (lambda* (#:key outputs #:allow-other-keys)
-              (let ((out #$output))
-                (mkdir-p (string-append out "/bin"))
-                (for-each (lambda (file)
-                            (copy-file file
-                                       (string-append out "/bin/"
-                                                      (basename file))))
-                          '("src/xdemos/glxdemo" "src/xdemos/glxgears"
-                            "src/egl/opengl/eglinfo"
-                            "src/xdemos/glxinfo" "src/xdemos/glxheads"))))))))
     (home-page "https://mesa3d.org/")
     (synopsis "Utility tools for Mesa")
     (description
