@@ -1714,6 +1714,7 @@ operate properly.")
             soxr
             speex
             srt
+            svt-av1
             twolame
             vidstab
             x265
@@ -1802,6 +1803,7 @@ operate properly.")
          "--enable-libsoxr"
          "--enable-libspeex"
          "--enable-libsrt"
+         "--enable-libsvtav1"
          "--enable-libtheora"
          "--enable-libtwolame"
          "--enable-libvidstab"
