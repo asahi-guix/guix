@@ -1100,11 +1100,16 @@ safety and thread safety guarantees.")
                       #$@(make-ignore-test-list
                           '("fn case"))))))
               (add-after 'unpack 'disable-tests-using-cargo-publish
+                ;; The publish procedure doesn't work in the build environment
+                ;; (see: https://github.com/rust-lang/rust/issues/120340).
                 (lambda _
                   (with-directory-excursion "src/tools/cargo/tests/testsuite"
                     (substitute* "alt_registry.rs"
                       #$@(make-ignore-test-list
                           '("fn warn_for_unused_fields")))
+                    (substitute* "registry_auth.rs"
+                      #$@(make-ignore-test-list
+                          '("fn token_not_logged")))
                     (substitute* '("cargo_add/locked_unchanged/mod.rs"
                                    "cargo_add/lockfile_updated/mod.rs"
                                    "cargo_remove/update_lock_file/mod.rs")
