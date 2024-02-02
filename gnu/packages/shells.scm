@@ -54,6 +54,7 @@
   #:use-module (gnu packages crates-io)
   #:use-module (gnu packages crates-web)
   #:use-module (gnu packages crates-windows)
+  #:use-module (gnu packages crypto)
   #:use-module (gnu packages curl)
   #:use-module (gnu packages documentation)
   #:use-module (gnu packages groff)
@@ -415,7 +416,7 @@ written by Paul Haahr and Byron Rakitzis.")
                  '())
              (list autoconf perl)))
     (inputs
-     (list ncurses))
+     (list libxcrypt ncurses))
     (arguments
      (list
       #:phases
