@@ -1906,10 +1906,10 @@ accepted as a quirk (ie AMD Vega 10).")
                                 "linux-pam-no-setfsuid.patch"))))
 
     (build-system gnu-build-system)
+    (inputs (list libxcrypt))
     (native-inputs
      (list flex
            ;; TODO: optional dependencies
-           ;; ("libxcrypt" ,libxcrypt)
            ;; ("cracklib" ,cracklib)
            ))
     (arguments
