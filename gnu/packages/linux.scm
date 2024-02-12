@@ -4360,7 +4360,7 @@ to the in-kernel OOM killer.")
   ;; The post-systemd fork, maintained by Gentoo.
   (package
     (name "eudev")
-    (version "3.2.11")
+    (version "3.2.14")
     (source (origin
               (method git-fetch)
               (uri (git-reference (url "https://github.com/gentoo/eudev")
@@ -4368,7 +4368,7 @@ to the in-kernel OOM killer.")
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0dzaqwjnl55f69ird57wb6skahc6l7zs1slsrzqqfhww33icp6av"))
+                "1f6lz57igi7iw2ls3fpzgw42bfznam4nf9368h7x8yf1mb737yxz"))
               (patches (search-patches "eudev-rules-directory.patch"))))
     (build-system gnu-build-system)
     (arguments
@@ -4402,7 +4402,7 @@ to the in-kernel OOM killer.")
               #$@(if (%current-target-system)
                      #~(#t)
                      #~((invoke (string-append #$output "/bin/udevadm")
-                                "hwdb" "--update"))))))
+                                "hwdb" "--update" "--root" #$output))))))
        #:configure-flags #~(list "--enable-manpages")))
     (native-inputs
      (list autoconf
@@ -4423,7 +4423,10 @@ to the in-kernel OOM killer.")
      ;; and similar; it also installs the '60-persistent-storage.rules' file,
      ;; which contains the rules to do that.
      (list `(,util-linux "lib") ;for blkid
-           kmod))
+           kmod
+           ;; These are for the static archives.
+           zlib
+           `(,zstd "lib")))
     (outputs '("out" "static"))
     (home-page "https://wiki.gentoo.org/wiki/Project:Eudev")
     (synopsis "Userspace device management")
