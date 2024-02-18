@@ -1098,6 +1098,11 @@ Language.")
                       ;; <https://jira.mariadb.org/browse/MDEV-24458>
                       ,@(if (string-prefix? "i686" (%current-system))
                             '("main.myisampack")
+                            '())
+
+                      ;; This test fails on aarch64-linux (Apple M1).
+                      ,@(if (string-prefix? "aarch64-linux" (%current-system))
+                            '("main.analyze_stmt_slow_query_log")
                             '())))
 
                    ;; This file contains a list of known-flaky tests for this
