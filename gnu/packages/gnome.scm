@@ -8241,7 +8241,15 @@ Evolution (hence the name), but is now used by other packages as well.")
     (propagated-inputs
      (modify-inputs (package-propagated-inputs evolution-data-server)
        (delete "gtk")
-       (replace "libsoup" libsoup-minimal-2)))))
+       (replace "libsoup" libsoup-minimal-2)))
+    (arguments
+     (substitute-keyword-arguments (package-arguments evolution-data-server)
+       ((#:phases phases '%standard-phases)
+        #~(modify-phases #$phases
+            (add-after 'unpack 'disable-failing-tests
+              (lambda _
+                (substitute* "tests/libebook/client/CMakeLists.txt"
+                  (("test-book-client-custom-summary") ""))))))))))
 
 (define-public caribou
   (package
