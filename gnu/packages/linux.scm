@@ -4357,83 +4357,84 @@ to the in-kernel OOM killer.")
     (license license:expat)))
 
 (define-public eudev
-  ;; The post-systemd fork, maintained by Gentoo.
-  (package
-    (name "eudev")
-    (version "3.2.14")
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference (url "https://github.com/gentoo/eudev")
-                                  (commit (string-append "v" version))))
-              (file-name (git-file-name name version))
-              (sha256
-               (base32
-                "1f6lz57igi7iw2ls3fpzgw42bfznam4nf9368h7x8yf1mb737yxz"))
-              (patches (search-patches "eudev-rules-directory.patch"))))
-    (build-system gnu-build-system)
-    (arguments
-     (list
-      #:phases
-      #~(modify-phases %standard-phases
-          (add-before 'bootstrap 'patch-file-names
-            (lambda* (#:key inputs native-inputs #:allow-other-keys)
-              (substitute* "man/make.sh"
-                (("/usr/bin/xsltproc")
-                 (search-input-file (or native-inputs inputs) "/bin/xsltproc")))))
-          (add-after 'install 'move-static-library
-            (lambda _
-              (let ((source (string-append #$output "/lib/libudev.a"))
-                    (target (string-append #$output:static "/lib/libudev.a")))
-                (mkdir-p (dirname target))
-                (link source target)
-                (delete-file source)
-                ;; Remove reference to the static library from the .la file
-                ;; such that Libtool looks for it in the usual places.
-                (substitute* (string-append #$output "/lib/libudev.la")
-                  (("old_library=.*")
-                   "old_library=''\n")))))
-          (add-after 'install 'build-hwdb
-            (lambda _
-              ;; Build OUT/etc/udev/hwdb.bin.  This allows 'lsusb' and
-              ;; similar tools to display product names.
-              ;;
-              ;; XXX: This can't be done when cross-compiling. Find another way
-              ;; to generate hwdb.bin for cross-built systems.
-              #$@(if (%current-target-system)
-                     #~(#t)
-                     #~((invoke (string-append #$output "/bin/udevadm")
-                                "hwdb" "--update" "--root" #$output))))))
-       #:configure-flags #~(list "--enable-manpages")))
-    (native-inputs
-     (list autoconf
-           automake
-           gperf
-           libtool
-           pkg-config
-           ;; For tests.
-           perl
-           python-wrapper
-           ;; For documentation.
-           docbook-xml-4.2
-           docbook-xsl
-           libxml2            ;for $XML_CATALOG_FILES
-           libxslt))
-    (inputs
-     ;; When linked against libblkid, eudev can populate /dev/disk/by-label
-     ;; and similar; it also installs the '60-persistent-storage.rules' file,
-     ;; which contains the rules to do that.
-     (list `(,util-linux "lib") ;for blkid
-           kmod
-           ;; These are for the static archives.
-           zlib
-           `(,zstd "lib")))
-    (outputs '("out" "static"))
-    (home-page "https://wiki.gentoo.org/wiki/Project:Eudev")
-    (synopsis "Userspace device management")
-    (description "Udev is a daemon which dynamically creates and removes
+  (let ((commit "e98a66787deb8751d8d7c8f92257bdb38aaa9050"))
+    ;; The post-systemd fork, maintained by Gentoo.
+    (package
+      (name "eudev")
+      (version (git-version "3.2.14" "2" commit))
+      (source (origin
+                (method git-fetch)
+                (uri (git-reference (url "https://github.com/gentoo/eudev")
+                                    (commit "e98a66787deb8751d8d7c8f92257bdb38aaa9050")))
+                (file-name (git-file-name name version))
+                (sha256
+                 (base32
+                  "05zag6y2whf6bxsib22gd3sbcjpz3xxj78l9d5ada9fkcfn5p4ha"))
+                (patches (search-patches "eudev-rules-directory.patch"))))
+      (build-system gnu-build-system)
+      (arguments
+       (list
+        #:phases
+        #~(modify-phases %standard-phases
+            (add-before 'bootstrap 'patch-file-names
+              (lambda* (#:key inputs native-inputs #:allow-other-keys)
+                (substitute* "man/make.sh"
+                  (("/usr/bin/xsltproc")
+                   (search-input-file (or native-inputs inputs) "/bin/xsltproc")))))
+            (add-after 'install 'move-static-library
+              (lambda _
+                (let ((source (string-append #$output "/lib/libudev.a"))
+                      (target (string-append #$output:static "/lib/libudev.a")))
+                  (mkdir-p (dirname target))
+                  (link source target)
+                  (delete-file source)
+                  ;; Remove reference to the static library from the .la file
+                  ;; such that Libtool looks for it in the usual places.
+                  (substitute* (string-append #$output "/lib/libudev.la")
+                    (("old_library=.*")
+                     "old_library=''\n")))))
+            (add-after 'install 'build-hwdb
+              (lambda _
+                ;; Build OUT/etc/udev/hwdb.bin.  This allows 'lsusb' and
+                ;; similar tools to display product names.
+                ;;
+                ;; XXX: This can't be done when cross-compiling. Find another way
+                ;; to generate hwdb.bin for cross-built systems.
+                #$@(if (%current-target-system)
+                       #~(#t)
+                       #~((invoke (string-append #$output "/bin/udevadm")
+                                  "hwdb" "--update" "--root" #$output))))))
+        #:configure-flags #~(list "--enable-manpages")))
+      (native-inputs
+       (list autoconf
+             automake
+             gperf
+             libtool
+             pkg-config
+             ;; For tests.
+             perl
+             python-wrapper
+             ;; For documentation.
+             docbook-xml-4.2
+             docbook-xsl
+             libxml2              ;for $XML_CATALOG_FILES
+             libxslt))
+      (inputs
+       ;; When linked against libblkid, eudev can populate /dev/disk/by-label
+       ;; and similar; it also installs the '60-persistent-storage.rules' file,
+       ;; which contains the rules to do that.
+       (list `(,util-linux "lib") ;for blkid
+             kmod
+             ;; These are for the static archives.
+             zlib
+             `(,zstd "lib")))
+      (outputs '("out" "static"))
+      (home-page "https://wiki.gentoo.org/wiki/Project:Eudev")
+      (synopsis "Userspace device management")
+      (description "Udev is a daemon which dynamically creates and removes
 device nodes from /dev/, handles hotplug events and loads drivers at boot
 time.")
-    (license license:gpl2+)))
+      (license license:gpl2+))))
 
 (define-public python-evdev
   (package
