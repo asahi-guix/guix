@@ -5806,6 +5806,7 @@ faster results and to avoid unnecessary server load.")
               ;; If not specified, udev will try putting history information
               ;; in /gnu/store.
               "-Dhistorydir=/var/lib/upower"
+              (string-append "-Dudevhwdbdir=" #$output "/lib/udev/hwdb.d")
               (string-append "-Dudevrulesdir=" #$output "/bin/udev/rules.d"))
       #:phases (if (target-x86-32?)
                    #~(modify-phases %standard-phases
