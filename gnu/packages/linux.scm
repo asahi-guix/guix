@@ -4346,15 +4346,15 @@ to the in-kernel OOM killer.")
 (define-public eudev
   (package
     (name "eudev")
-    (version "3.2.14")
+    (version "3.2.15.e98a667")
     (source (origin
               (method git-fetch)
               (uri (git-reference (url "https://github.com/gentoo/eudev")
-                                  (commit (string-append "v" version))))
+                                  (commit "e98a66787deb8751d8d7c8f92257bdb38aaa9050")))
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1f6lz57igi7iw2ls3fpzgw42bfznam4nf9368h7x8yf1mb737yxz"))
+                "05zag6y2whf6bxsib22gd3sbcjpz3xxj78l9d5ada9fkcfn5p4ha"))
               (patches (search-patches "eudev-rules-directory.patch"))
               (modules '((guix build utils)))))
     (build-system gnu-build-system)
