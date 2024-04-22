@@ -1722,6 +1722,7 @@ Analysis and Reporting Technology) functionality.")
      (list acl
            bash-minimal
            cryptsetup
+           kmod
            libatasmart
            libblockdev
            libgudev
