@@ -174,7 +174,49 @@ SPIR-V, aiming to emit GLSL or MSL that looks like human-written code.")
              (string-append "-DLLVM_EXTERNAL_LIT="
                             (assoc-ref %build-inputs "python-lit")
                             "/bin/lit")
-             "-DLLVM_SPIRV_INCLUDE_TESTS=ON")))
+             "-DLLVM_SPIRV_INCLUDE_TESTS=ON")
+       #:phases
+       (modify-phases %standard-phases
+         ,@(if (target-aarch64?)
+               `((add-after 'unpack 'disable-aarch64-tests
+                   (lambda _
+                     ;; The following tests fail on an Apple M1 aarch64 with:
+                     ;; LLVM ERROR: Unsupported calling convention.
+                     (for-each delete-file-recursively
+                               (list "test/DebugInfo/X86"
+                                     "test/DebugInfo/Generic/2009-11-10-CurrentFn.ll"
+                                     "test/DebugInfo/Generic/2010-03-12-llc-crash.ll"
+                                     "test/DebugInfo/Generic/2010-03-24-MemberFn.ll"
+                                     "test/DebugInfo/Generic/2010-10-01-crash.ll"
+                                     "test/DebugInfo/Generic/PR20038.ll"
+                                     "test/DebugInfo/Generic/constant-pointers.ll"
+                                     "test/DebugInfo/Generic/dead-argument-order.ll"
+                                     "test/DebugInfo/Generic/debug-info-eis-option.ll"
+                                     "test/DebugInfo/Generic/dwarf-public-names.ll"
+                                     "test/DebugInfo/Generic/enum.ll"
+                                     "test/DebugInfo/Generic/func-using-decl.ll"
+                                     "test/DebugInfo/Generic/global.ll"
+                                     "test/DebugInfo/Generic/imported-name-inlined.ll"
+                                     "test/DebugInfo/Generic/inline-scopes.ll"
+                                     "test/DebugInfo/Generic/inlined-arguments.ll"
+                                     "test/DebugInfo/Generic/inlined-vars.ll"
+                                     "test/DebugInfo/Generic/linear-dbg-value.ll"
+                                     "test/DebugInfo/Generic/linkage-name-abstract.ll"
+                                     "test/DebugInfo/Generic/member-order.ll"
+                                     "test/DebugInfo/Generic/missing-abstract-variable.ll"
+                                     "test/DebugInfo/Generic/multiline.ll"
+                                     "test/DebugInfo/Generic/namespace_function_definition.ll"
+                                     "test/DebugInfo/Generic/namespace_inline_function_definition.ll"
+                                     "test/DebugInfo/Generic/noscopes.ll"
+                                     "test/DebugInfo/Generic/ptrsize.ll"
+                                     "test/DebugInfo/Generic/restrict.ll"
+                                     "test/DebugInfo/Generic/two-cus-from-same-file.ll"
+                                     "test/DebugInfo/Generic/varargs.ll"
+                                     "test/DebugInfo/Generic/version.ll"
+                                     "test/DebugInfo/LocalAddressSpace.ll"
+                                     "test/DebugInfo/UnknownBaseType.ll"
+                                     "test/DebugInfo/expr-opcode.ll")))))
+               '()))))
     (inputs (list llvm-18))
     (native-inputs (list clang-18 llvm-18 python-lit spirv-headers))
     (home-page "https://github.com/KhronosGroup/SPIRV-LLVM-Translator")
