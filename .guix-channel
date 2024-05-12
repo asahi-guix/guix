@@ -4,4 +4,4 @@
   (version 0)
   (news-file "etc/news.scm")
   (keyring-reference "keyring")
-  (url "https://git.savannah.gnu.org/git/guix.git")) ;the primary URL
+  (url "https://github.com/asahi-guix/guix")) ;the primary URL
