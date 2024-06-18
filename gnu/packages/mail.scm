@@ -2114,6 +2114,7 @@ facilities for checking incoming mail.")
            libsodium ; extra password algorithms
            libstemmer
            libunwind
+           libxcrypt
            linux-pam
            lz4
            openssl
