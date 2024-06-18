@@ -3365,7 +3365,7 @@ notifications.")
     (native-inputs
      (list pkg-config universal-ctags))
     (inputs
-     (list libressl))
+     (list libressl libxcrypt))
     (home-page "https://git.causal.agency/pounce")
     (synopsis "Simple multi-client TLS-only IRC bouncer")
     (description
