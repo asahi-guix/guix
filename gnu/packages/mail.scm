@@ -2072,6 +2072,7 @@ delivery.")
            gzip
            libnsl
            libxaw
+           libxcrypt
            libxt
            perl
            perl-file-fcntllock
