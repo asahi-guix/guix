@@ -2075,6 +2075,7 @@ TCP connection, TLS handshake and so on) in the terminal.")
            openldap
            linux-pam
            libcap
+           libxcrypt
            cyrus-sasl
            expat
            libxml2
