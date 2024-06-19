@@ -283,7 +283,7 @@ XMPP-based sessions.")
            gobject-introspection
            gtk-doc/stable
            pkg-config))
-    (inputs (list ncurses))
+    (inputs (list libxcrypt ncurses))
     (propagated-inputs (list glib libxml2 python-2))
     (synopsis "GLib Ncurses Toolkit")
     (description "GNT is an ncurses toolkit for creating text-mode graphical
