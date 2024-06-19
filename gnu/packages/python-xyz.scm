@@ -12996,6 +12996,7 @@ implementation of D-Bus.")
   (package/inherit python-dbus
     (name "python2-dbus")
     (inputs `(("python" ,python-2)
+              ("libxcrypt" ,libxcrypt)  ;required by Python.h
               ,@(alist-delete "python"
                               (package-inputs python-dbus))))
     (arguments
