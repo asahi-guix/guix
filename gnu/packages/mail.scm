@@ -3932,6 +3932,7 @@ operators and scripters.")
     (arguments
      `(#:make-flags
        (list (string-append "CC=" ,(cc-for-target)))
+       #:parallel-build? #f             ;fails otherwise
        #:configure-flags (list (string-append "--with-ssl-include-dir="
                                               (assoc-ref %build-inputs "openssl")
                                               "/include/openssl")
