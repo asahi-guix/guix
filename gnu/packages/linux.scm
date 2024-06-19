@@ -3599,7 +3599,8 @@ configuration and monitoring interfaces.")
                    ((string=? python "python2")
                     `(("python-2" ,python-2)))
                    ((string=? python "python3")
-                    `(("python-3" ,python-3))))))
+                    `(("python-3" ,python-3))))
+                ("libxcrypt" ,libxcrypt))) ;required by Python.h
       (propagated-inputs (list libnl))
       (outputs '("out"))
       (arguments
