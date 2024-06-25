@@ -1183,7 +1183,7 @@ application suites.")
                             ;; also disabled these, see:
                             ;; https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1050075
                             "--no-suite=wayland_failing"
-                            "--no-suite=wayland_gles_failing")
+                            "--no-suite=wayland_gles2_failing")
       #:phases
       #~(modify-phases %standard-phases
           (add-after 'unpack 'generate-gdk-pixbuf-loaders-cache-file
