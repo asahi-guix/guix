@@ -176,6 +176,7 @@ TRIPLET."
                       (outputs '("out"))
                       (configure-flags ''())
                       (search-paths '())
+                      (out-of-source? #t)
                       (build-type "debugoptimized")
                       (tests? #t)
                       (test-options ''())
@@ -225,6 +226,7 @@ has a 'meson.build' file."
                              #$(if (pair? configure-flags)
                                    (sexp->gexp configure-flags)
                                    configure-flags)
+                             #:out-of-source? #$out-of-source?
                              #:build-type #$build-type
                              #:tests? #$tests?
                              #:test-options #$(sexp->gexp test-options)
@@ -257,7 +259,7 @@ has a 'meson.build' file."
                             (configure-flags ''())
                             (search-paths '())
                             (native-search-paths '())
-
+                            (out-of-source? #t)
                             (build-type "debugoptimized")
                             (tests? #f)
                             (test-options ''())
@@ -338,6 +340,7 @@ SOURCE has a 'meson.build' file."
                                            ,@#$(if (pair? configure-flags)
                                                    (sexp->gexp configure-flags)
                                                    configure-flags))
+                       #:out-of-source? #$out-of-source?
                        #:build-type #$build-type
                        #:tests? #$tests?
                        #:test-options #$(sexp->gexp test-options)
