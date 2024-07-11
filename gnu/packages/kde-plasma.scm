@@ -39,6 +39,7 @@
   #:use-module (gnu packages authentication)
   #:use-module (gnu packages bash)
   #:use-module (gnu packages compression)
+  #:use-module (gnu packages crypto)
   #:use-module (gnu packages display-managers)
   #:use-module (gnu packages firmware)
   #:use-module (gnu packages fontutils)
@@ -2435,6 +2436,7 @@ sensors, process information and other system resources.")
                   gmp
                   mpfr
                   libsm
+                  libxcrypt
                   libxft
                   libxkbcommon
                   libxrender
