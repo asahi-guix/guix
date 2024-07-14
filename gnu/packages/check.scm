@@ -3554,7 +3554,25 @@ provides a simple way to achieve this.")
            (commit commit)))
          (file-name (git-file-name name version))
          (sha256
-          (base32 "0f2dmsym8ibnwkaidxmgp73mg0sdniwsyn6ppskh74246h29bbcy"))))
+          (base32 "1s2qva1amhs887jcdj12ppxk9kkfvy25xy7vzhkwb7rljr3gj713"))
+         (modules '((guix build utils)))
+         (snippet
+          #~(begin
+              (make-file-writable "ext/CMakeLists.txt")
+              (call-with-output-file "ext/CMakeLists.txt"
+                (lambda (out)
+                  (display "find_package(Catch2 REQUIRED GLOBAL)\n" out)
+                  (display "find_package(GTest GLOBAL)\n" out)
+                  (display "find_package(Boost GLOBAL)\n" out)))
+              (substitute* "extras/boost/test/CMakeLists.txt"
+                (("^([ ]*)boost" all spaces)
+                 (string-append spaces "Boost::boost")))
+              ;; Disable tests failing on Apple M1 and Hetzner CAX41 (aarch64).
+              ;; Upstream issue: https://github.com/emil-e/rapidcheck/issues/328
+              (substitute* "test/gen/NumericTests.cpp"
+                (("forEachType<SignedProperties.*") ""))
+              (substitute* "test/shrink/ShrinkTests.cpp"
+                (("forEachType<SignedIntegralProperties.*") ""))))))
       (arguments
        (list
         #:tests? #f                     ;require fetching submodules
